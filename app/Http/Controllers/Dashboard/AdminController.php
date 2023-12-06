@@ -1,16 +1,18 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\Controllers\Dashboard;
 
-use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class {{ class }} extends Controller
+class AdminController extends Controller
 {
     
     public function index()
     {
-        return view('dashboard.backend.admins.index');
+        $admins = User::where('type' , 'admin')->get();
+        return view('dashboard.backend.admins.index' , compact('admins'));
     }
 
     
@@ -49,7 +51,7 @@ class {{ class }} extends Controller
     public function update(Request $request, string $id)
     {
         
-        
+
     }
 
    

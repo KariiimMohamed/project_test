@@ -1,12 +1,12 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class {{ class }} extends FormRequest
+class LoginRequest extends FormRequest
 {
-    
+   
     public function authorize(): bool
     {
         return true;
@@ -17,6 +17,8 @@ class {{ class }} extends FormRequest
     {
         return [
             
+            'email'    => 'required|email' ,
+            'password' => 'required' ,
         ];
     }
 }
