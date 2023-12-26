@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
                 'price'           => $fake->numberBetween(10 , 20) ,
                 'qty'             => $fake->numberBetween(1 , 5) ,
                 'time'            => 'time' ,
-                'category_id'     => rand(1,3) ,
+                'category_id'     => rand(17,19) ,
             ]);
             
         }

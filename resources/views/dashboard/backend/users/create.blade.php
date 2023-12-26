@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('title')
- Create Admins
+ Create Users
 @endsection
 
 @section('content')
@@ -11,18 +11,17 @@
 <div class="card shadow mb-4">
 
     <div class="card-header py-3 d-flex">
-        <h6 class="m-0 font-weight-bold text-primary"> Admins </h6>
+        <h6 class="m-0 font-weight-bold text-primary"> Users </h6>
         <div class="ml-auto">
             <a href="" class="btn btn-primary">
             <span><i class="fa fa-home"></i></span>
-            <span> {{ __('models.admins') }} </span>
         </a>
         </div>
     </div>
 
     <div class="card-body">
 
-        <form action="{{ route('admin.admins.store') }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+        <form action="{{ route('admin.users.store') }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
             @csrf
 
             <div class="row">

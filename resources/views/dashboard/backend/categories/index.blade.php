@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('title')
- Admins
+ Categories
 @endsection
 
 
@@ -16,11 +16,11 @@
             
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">New Amins</span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ $admins->count() }} new Admins</span>
+                    <span class="card-label fw-bolder fs-3 mb-1">New Categories</span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Over {{ $categories->count() }} new Categories</span>
                 </h3>
                 <div class="card-toolbar">
-                    <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-light-primary">
+                    <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-light-primary">
                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                     <span class="svg-icon svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -28,7 +28,7 @@
                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                         </svg>
                     </span>
-                    <!--end::Svg Icon-->New Admins</a>
+                    <!--end::Svg Icon-->New Categories</a>
                 </div>
             </div>
             <!--end::Header-->
@@ -41,8 +41,9 @@
                         <!--begin::Table head-->
                         <thead>
                             <tr class="fw-bolder text-muted bg-light">
-                                <th class="ps-4 min-w-325px rounded-start">Admins</th>
-                                <th class="min-w-125px">Email</th>
+                                <th class="ps-4 min-w-325px rounded-start">Categories</th>
+                                <th class="min-w-125px">name</th>
+                                <th class="min-w-200px text-end rounded-end"></th>
                                 <th class="min-w-200px text-end rounded-end"></th>
                             </tr>
                         </thead>
@@ -50,25 +51,30 @@
                         <!--begin::Table body-->
                         <tbody>
 
-                            @foreach ($admins as $admin)
+                            @foreach ($categories as $category)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-50px me-5">
-                                                <img src="{{ asset('storage/' . $admin->img) }}" class="" alt="{{ $admin->name }}" />
+                                                <img src="{{ asset('storage/' . $category->img) }}" class="" alt="{{ $category->name_en }}" />
                                             </div>
                                             <div class="d-flex justify-content-start flex-column">
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $admin->name }}</a>
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $category->name_en }}</a>
                                             </div>
                                         </div>
                                     </td>
+
                                     <td>
-                                        <span class="text-muted fw-bold text-muted d-block fs-7">{{ $admin->email }}</span>
+                                        <span class="text-muted fw-bold text-muted d-block fs-7">{{$category->name }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted fw-bold text-muted d-block fs-7">{{ $category->link }}</span>
                                     </td>
                                     
                                     <td class="text-end">
                                        
-                                        <a href="{{ route('admin.admins.edit' , $admin->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                        <a href="{{ route('admin.categories.edit' , $category->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -78,7 +84,7 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        <a href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Delete{{ $admin->id }}">
+                                        <a href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Delete{{ $category->id }}">
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -89,7 +95,7 @@
                                             </span>
                                         </a>
 
-                                        @include('dashboard.backend.admins.delete')
+                                        @include('dashboard.backend.categories.delete')
                                     </td>
                                 </tr>
                                 

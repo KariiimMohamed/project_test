@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('title')
- Create Admins
+ Edit Users
 @endsection
 
 @section('content')
@@ -11,26 +11,28 @@
 <div class="card shadow mb-4">
 
     <div class="card-header py-3 d-flex">
-        <h6 class="m-0 font-weight-bold text-primary"> Admins </h6>
+        <h6 class="m-0 font-weight-bold text-primary"> Users </h6>
         <div class="ml-auto">
             <a href="" class="btn btn-primary">
             <span><i class="fa fa-home"></i></span>
-            <span> {{ __('models.admins') }} </span>
+            <span> Users</span>
         </a>
         </div>
     </div>
 
     <div class="card-body">
 
-        <form action="{{ route('admin.admins.store') }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+        <form action="{{ route('admin.users.update' , $user->id) }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
-
+ 
             <div class="row">
+
                 <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                         <span class="required">Name</span>
                     </label>
-                    <input type="text" name="name" value="{{ old('name') }}" class="form-control form-control-solid" placeholder="Enter name" >
+                    <input type="text" name="name" value="{{ old('name' , $user->name) }}" class="form-control form-control-solid" placeholder="Enter name" >
                     @error('name') <span class="text-danger">{{ $message }}</span>  @enderror
                 </div>
 
@@ -39,10 +41,13 @@
                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
                         <span class="required">Email</span>
                     </label>
-                    <input type="email" name="email" value="{{ old('email') }}" class="form-control form-control-solid" placeholder="Enter email" >
+                    <input type="email" name="email" value="{{ old('email' , $user->email) }}" class="form-control form-control-solid" placeholder="Enter email" >
                     @error('email') <span class="text-danger">{{ $message }}</span>  @enderror
                 </div>
-                
+
+
+             
+
             </div>
 
             
@@ -70,7 +75,7 @@
                 <div class="col-md-6 col-12 mb-3">
                         <label for="formFile" class="form-label">Image</label>
                         <input class="form-control image" type="file" id="formFile"
-                            name="img" required>
+                            name="img">
 
                         @error('img')
                             <span class="text-danger">
@@ -80,7 +85,7 @@
                 </div>
 
                 <div class="form-group prev">
-                    <img src="" style="width: 100px" class="img-thumbnail preview-formFile" alt="">
+                    <img src="{{ asset('storage/' . $user->img) }}" style="width: 100px" class="img-thumbnail preview-formFile" alt="">
                 </div>
 
 

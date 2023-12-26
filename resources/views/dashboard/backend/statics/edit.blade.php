@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('title')
- Create Admins
+ Edit Statics
 @endsection
 
 @section('content')
@@ -9,68 +9,71 @@
 
 
 <div class="card shadow mb-4">
-
+ 
     <div class="card-header py-3 d-flex">
-        <h6 class="m-0 font-weight-bold text-primary"> Admins </h6>
+        <h6 class="m-0 font-weight-bold text-primary"> Statics </h6>
         <div class="ml-auto">
             <a href="" class="btn btn-primary">
             <span><i class="fa fa-home"></i></span>
-            <span> {{ __('models.admins') }} </span>
+            <span> Statics </span> 
         </a>
         </div>
     </div>
 
     <div class="card-body">
 
-        <form action="{{ route('admin.admins.store') }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+        <form action="{{ route('admin.statics.update' , $static->id) }}" method="POST" class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
 
             <div class="row">
-                <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
-                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span class="required">Name</span>
-                    </label>
-                    <input type="text" name="name" value="{{ old('name') }}" class="form-control form-control-solid" placeholder="Enter name" >
-                    @error('name') <span class="text-danger">{{ $message }}</span>  @enderror
-                </div>
-
 
                 <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span class="required">Email</span>
+                        <span class="required">Name in English</span>
                     </label>
-                    <input type="email" name="email" value="{{ old('email') }}" class="form-control form-control-solid" placeholder="Enter email" >
-                    @error('email') <span class="text-danger">{{ $message }}</span>  @enderror
+                    <input type="text" name="name_en" value="{{ old('name_en' , $static->name_en) }}" class="form-control form-control-solid" placeholder="Enter name" >
+                    @error('name_en') <span class="text-danger">{{ $message }}</span>  @enderror
                 </div>
-                
-            </div>
-
-            
-            <div class="row">
 
                 <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
                     <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                        <span class="required">Password</span>
+                        <span class="required">Name in Arabic</span>
                     </label>
-                    <input type="password" name="password" value="{{ old('password') }}" class="form-control form-control-solid" placeholder="Enter password" >
-                    @error('password') <span class="text-danger">{{ $message }}</span>  @enderror
-                </div>
+                    <input type="text" name="name_ar" value="{{ old('name_ar' ,  $static->name_ar) }}" class="form-control form-control-solid" placeholder="Enter name" >
+                    @error('name_ar') <span class="text-danger">{{ $message }}</span>  @enderror
+                </div> 
 
-                <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container"></div>
-
-
-
-
-            
             </div>
 
             <div class="row">
 
-                
+                <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
+                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                        <span class="required">Description in English</span>
+                    </label>
+                    <input type="text" name="desc_en" value="{{ old('desc_en' , $static->desc_en ) }}" class="form-control form-control-solid" placeholder="Enter description" >
+                    @error('desc') <span class="text-danger">{{ $message }}</span>  @enderror
+                </div>
+
+                <div class="d-flex col-6 flex-column mb-7 fv-row fv-plugins-icon-container">
+                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                        <span class="required">Description in Arabic</span>
+                    </label>
+                    <input type="text" name="desc_ar" value="{{ old('desc_ar' , $static->desc_ar ) }}" class="form-control form-control-solid" placeholder="Enter description" >
+                    @error('desc') <span class="text-danger">{{ $message }}</span>  @enderror
+                </div>
+
+            </div>
+
+            
+         
+            <div class="row">
+  
                 <div class="col-md-6 col-12 mb-3">
                         <label for="formFile" class="form-label">Image</label>
                         <input class="form-control image" type="file" id="formFile"
-                            name="img" required>
+                            name="img">
 
                         @error('img')
                             <span class="text-danger">
@@ -80,19 +83,20 @@
                 </div>
 
                 <div class="form-group prev">
-                    <img src="" style="width: 100px" class="img-thumbnail preview-formFile" alt="">
+                    <img src="{{ asset('storage/' . $static->img) }}" style="width: 100px" class="img-thumbnail preview-formFile" alt="">
                 </div>
-
 
             </div>
 
-          
+
 
             <div class="text-center pt-15">
+
                 <button type="submit" class="btn btn-primary">
                     <span class="indicator-label">Submit</span>
                     <span class="indicator-progress">Please wait...</span>
                 </button>
+                
             </div>
 
         </form>
